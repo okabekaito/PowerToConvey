@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only:[:show, :edit, :update, :destroy]
   def index
-  @books =current_user.books
+  @books =current_user.books.order(created_at: :desc)
   end
 
   def show
@@ -12,11 +12,11 @@ class BooksController < ApplicationController
   end
 
   def create
-  book = current_user.new(book_params)
+  @book = current_user.books.new(book_params)
 
 
-  if book.save
-  redirect_to @book, notice:"「#{book.title}」を登録しました"
+  if @book.save
+  redirect_to @book, notice:"「#{@book.title}」を登録しました"
   else
     render :new
   end
@@ -27,12 +27,12 @@ class BooksController < ApplicationController
 
   def update
     @book.update!(book_params)
-    redirect_to books_url, notice:"「#{book.title}」を更新しました"
+    redirect_to books_url, notice:"「#{@book.title}」を更新しました"
   end
 
   def destroy
     @book.destroy
-    redirect_to books_url, notice:"「#{book.title}」を削除しました"
+    redirect_to books_url, notice:"「#{@book.title}」を削除しました"
   end
 
   private

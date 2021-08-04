@@ -1,6 +1,4 @@
-class AddUserToBooks < ActiveRecord::Migration[5.2]
-  def change
-  end
+class AddUserIdToBooks < ActiveRecord::Migration[5.2]
 
   def up
     execute 'DELETE FROM books;'
