@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
   before_action :set_book, only:[:show, :edit, :update, :destroy]
+  
   def index
-  @books =current_user.books.order(created_at: :desc)
+  @q = current_user.books.ransack(params[:q])
+  @books = @q.result(distinct: true).page(params[:page])
   end
 
   def show
@@ -32,13 +34,12 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_url, notice:"「#{@book.title}」を削除しました"
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:title,:author,:wrapUp)
+    params.require(:book).permit(:title,:author,:wrapUp,:image)
   end
 
   def set_book

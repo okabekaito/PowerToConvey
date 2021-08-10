@@ -15,6 +15,7 @@ ja:
         title: タイトル
         author: 著者
         wrapUp: 要約
+        image: 画像
         created_at: 登録日時
         updated_at: 更新日時
       user:

@@ -14,6 +14,9 @@ table.table.table-hover
             th=Book.human_attribute_name(:author)
             td=@book.author
         tr 
+            th=Book.human_attribute_name(:image)
+            td=image_tag @book.image if @book.image.attached?
+        tr 
             th=Book.human_attribute_name(:wrapUp)
             td=simple_format(h(@book.wrapUp), {},sanitize: false,wrapper_tag: "div")
         tr 

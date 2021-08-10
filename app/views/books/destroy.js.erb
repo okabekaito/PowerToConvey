@@ -1,0 +1,5 @@
+document.querySelector("#book-<%=@book.id %>").style.display = 'none';
+
+var message = document.createElement('p');
+message.innerText = 'タイトル「<%=@book.title%>」を削除しました。残りの要約は<%= current_user.books.count%>件です';
+document.querySelector('table').insertAdjacentElement('beforebegin',message);
